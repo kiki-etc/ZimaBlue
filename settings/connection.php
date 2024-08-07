@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = ""; // Change this to your MySQL root password
-$dbname = "database";
+$dbname = "JudicialManagementSystem";
 
 // Create a connection
 $conn = new mysqli($servername, $username, $password, $dbname);
