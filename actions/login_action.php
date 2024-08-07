@@ -71,4 +71,3 @@ if (isset($_POST['submit_button'])) {
     header("Location: ../login/login_view.php");
     exit();
 }
-?>

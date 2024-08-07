@@ -5,7 +5,7 @@ body {
 }
 
 header {
-    background-color: #753900;
+    background-color: #A53838;
     color: #FFF8ED;
     padding: 20px;
 }
@@ -48,7 +48,7 @@ section {
 
 #description {
     background-color: #FFF7ED;
-    color: #753900;
+    color: #A53838;
 }
 
 #middle {
@@ -159,7 +159,7 @@ footer {
   
   .button2:hover:after {
     top: -45%;
-    background-color: #753900;
+    background-color: #A53838;
     transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
   }
   

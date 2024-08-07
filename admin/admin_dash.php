@@ -1,8 +1,21 @@
 <?php  
 include "../settings/core.php";
+include "../settings/connection.php";
 
-if ($_SESSION['user_role'] != (SELECT RoleID FROM Roles WHERE RoleName = 'superadmin') && $_SESSION['user_role'] != (SELECT RoleID FROM Roles WHERE RoleName = 'admin')) {
+// Get the role IDs for superadmin and admin
+$superadminRoleQuery = "SELECT RoleID FROM Roles WHERE RoleName = 'superadmin'";
+$superadminRoleResult = $conn->query($superadminRoleQuery);
+$superadminRoleRow = $superadminRoleResult->fetch_assoc();
+$superadminRoleID = $superadminRoleRow['RoleID'];
+
+$adminRoleQuery = "SELECT RoleID FROM Roles WHERE RoleName = 'admin'";
+$adminRoleResult = $conn->query($adminRoleQuery);
+$adminRoleRow = $adminRoleResult->fetch_assoc();
+$adminRoleID = $adminRoleRow['RoleID'];
+
+if ($_SESSION['user_role'] != $superadminRoleID && $_SESSION['user_role'] != $adminRoleID) {
     header("Location: ../view/user_dash.php");
+    exit();
 } else {
 ?>
 <!DOCTYPE html>

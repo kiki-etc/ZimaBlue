@@ -1,6 +1,6 @@
 <?php
 // Include the functions file from the functions folder
-include 'functions/functions.php';
+include 'functions.php';
 
 // Database connection parameters
 $servername = "localhost";

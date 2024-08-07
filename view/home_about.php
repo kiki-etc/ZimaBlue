@@ -29,7 +29,7 @@
 <section id="description">
     <h2>Zima Blue</h2>
     <p>Martha Agyeman, Princess Asiru-Balogun and Nyameye Akumia are developing a web application to manage AJC cases.</p>
-    <p>The administrator (usually the head of the household) will also be in charge of managing and updating the database to keep track of the urgency of the items and delete items as necessary.</p>
+    <p>The administrator (superadmin) will have additional funcitonality that regular users do not have. Below are their login credentials:</p>
     <p>Administrator Email: superadmin@ashesi.edu.gh</p>
     <p>Administrator Password: Superadmin2024!</p>
     <p></p>
@@ -37,6 +37,8 @@
 <div id="middle">
     <button class="button2" onclick="window.location.href = '../login/signup_view.php';">Register</button>
     <button class="button2" onclick="window.location.href = '../login/login_view.php';">Login</button>
+    <br>
+    <br>
 </div>
 <footer>
     <p>&copy; 2024 Ashesi Judicial Council, Case Manager. All rights reserved.</p>
