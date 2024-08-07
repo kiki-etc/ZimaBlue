@@ -1,7 +1,7 @@
 <?php  
 include "../settings/core.php";
 
-if ($_SESSION['user_role'] != (SELECT RoleID FROM Roles WHERE RoleName = 'superadmin' || 'admin'))  {
+if ($_SESSION['user_role'] != (SELECT RoleID FROM Roles WHERE RoleName = 'superadmin') && $_SESSION['user_role'] != (SELECT RoleID FROM Roles WHERE RoleName = 'admin')) {
     header("Location: ../view/user_dash.php");
 } else {
 ?>
@@ -23,9 +23,9 @@ if ($_SESSION['user_role'] != (SELECT RoleID FROM Roles WHERE RoleName = 'supera
             </a>
         </div>
         <div class="menu_top">
-            <a href="../view/admin_dash.php"><i class="fa-solid fa-house"></i>Dashboard</a>
-            <a href="../view/cases.php"><i class="fa-solid fa-magnifying-glass"></i> View AJC Cases</a>
-            <a href="../view/add_case.php"><i class="fa-solid fa-align-justify"></i>Add New Case</a>
+            <a href="../admin/admin_dash.php"><i class="fa-solid fa-house"></i>Dashboard</a>
+            <a href="../admin/cases.php"><i class="fa-solid fa-magnifying-glass"></i> View AJC Cases</a>
+            <a href="../admin/add_case.php"><i class="fa-solid fa-align-justify"></i>Add New Case</a>
             <a href="#" style="margin-top: 30px;">
                 ---------------------
             </a>
