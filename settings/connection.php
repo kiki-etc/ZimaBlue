@@ -1,12 +1,13 @@
 <?php
+$servername = "localhost";
+$username = "root";
+$password = ""; // Change this to your MySQL root password
+$dbname = "database";
 
-$SERVER = "fdb1034.awardspace.net";
-$USERNAME = "4471370_wishlist";
-$PSSWRD = "WebTech2024!";
-$DATABASE = "4471370_wishlist";
+// Create a connection
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-$conn = new mysqli($SERVER, $USERNAME, $PSSWRD, $DATABASE);
-
+// Check the connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
