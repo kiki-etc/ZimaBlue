@@ -1,5 +1,5 @@
 <?php
-include "../db/connection.php"; // Ensure this file correctly sets up the $conn variable
+include "../settings/connection.php"; // Ensure this file correctly sets up the $conn variable
 
 header('Content-Type: application/json');
 

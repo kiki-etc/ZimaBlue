@@ -1,5 +1,5 @@
 <?php
-include "../db/connection.php"; // Ensure this file correctly sets up the $conn variable
+include "../settings/connection.php"; // Ensure this file correctly sets up the $conn variable
 
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $limit = 10; // Number of activities per page

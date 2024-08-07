@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    width: 100%;
+    background: #FFF8ED;
+    display: flex;
+}
+
+
+.sidebar {
+    background-color: #A53838;
+    height: 100%;
+    width: 20%;
+    color: #FFF8ED;
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+}
+
+.sidebar_logo {
+    align-self: flex-start;
+    margin-bottom: 2px;
+}
+
+.sidebar_logo img {
+    width: 100%;
+    height: auto;
+}
+
+.menu_top a {
+    display: block;
+    padding: 10px;
+    color: #FFF8ED;
+    text-decoration: none;
+    padding-top: 10px;
+    float: left;
+}
+
+i {
+    margin-right: 10px;
+}
+
+.content {
+    background: #FFF8ED;
+    height: 100%;
+    padding-left: 20%;
+    width: 100%;
+}
+
+.header {
+    font-family: 'Poppins';
+    padding-top: 10px;
+    padding-left: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 30px;
+    color: #A53838;
+    height: 65px;
+}
+
+.stats {
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: calc(97.5% - 60px);
+
+}
+
+.stats .box:first-child {
+    margin-left: 30px;
+}
+
+.box {
+    background-color: #A53838;
+    color: #FFF8ED;
+    padding: 20px;
+    width: calc(20% - 20px);
+    margin-right: 20px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.recent-activities {
+    margin-top: 30px;
+    background: #A53838;
+    padding: 20px;
+    width: calc(97.5% - 60px);
+    margin-left: 30px;
+    margin-right: -20px;
+    border-radius: 8px;
+}
+
+.recent-activities h2 {
+    color: #FFF8ED;
+    margin-bottom: 10px;
+
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #FFF8ED;
+
+}
+
+table thead {
+    background-color: #A53838;
+    color: #FFF8ED;
+}
+
+table th,
+table td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #FFF8ED;
+}
+
+table td {
+    border: none;
+}
+
+.pagination {
+    position: relative;
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pagination button {
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: #FFF8ED;
+    color: #A53838;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
