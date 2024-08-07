@@ -54,4 +54,12 @@ CREATE TABLE Documents (
     FOREIGN KEY (UploadedBy) REFERENCES Users(UserID)
 );
 
+CREATE TABLE Activities (
+    ActivityID INT PRIMARY KEY AUTO_INCREMENT,
+    UserID INT,
+    ActivityDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Description TEXT,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
+
 INSERT INTO Roles (RoleName) VALUES ('superadmin'), ('admin'), ('user');
