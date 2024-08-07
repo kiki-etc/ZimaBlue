@@ -27,6 +27,7 @@ CREATE TABLE Cases (
     CaseNumber VARCHAR(50) NOT NULL UNIQUE,
     Title VARCHAR(255) NOT NULL,
     Description TEXT,
+    Status VARCHAR(20) DEFAULT 'pending', -- Add Status column
     CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CreatedBy INT,
     FOREIGN KEY (CreatedBy) REFERENCES Users(UserID)
@@ -52,6 +53,5 @@ CREATE TABLE Documents (
     FOREIGN KEY (CaseID) REFERENCES Cases(CaseID),
     FOREIGN KEY (UploadedBy) REFERENCES Users(UserID)
 );
-
 
 INSERT INTO Roles (RoleName) VALUES ('superadmin'), ('admin'), ('user');
