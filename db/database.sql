@@ -32,6 +32,16 @@ CREATE TABLE Cases (
     FOREIGN KEY (CreatedBy) REFERENCES Users(UserID)
 );
 
+CREATE TABLE ComplaintsSuggestions (
+    ComplaintSuggestionID INT PRIMARY KEY AUTO_INCREMENT,
+    UserID INT,
+    Title VARCHAR(255) NOT NULL,
+    Description TEXT NOT NULL,
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Status VARCHAR(50) DEFAULT 'Pending',
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
+
 CREATE TABLE Documents (
     DocumentID INT PRIMARY KEY AUTO_INCREMENT,
     CaseID INT,
