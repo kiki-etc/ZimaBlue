@@ -79,7 +79,7 @@ if ($result->num_rows > 0) {
             <h2>Case Number: <?php echo htmlspecialchars($case['CaseNumber']); ?></h2>
             <p><strong>Title:</strong> <?php echo htmlspecialchars($case['Title']); ?></p>
             <p><strong>Description:</strong></p>
-            <p><?php echo nl2br(htmlspecialchars($case['Description'])); ?></p>
+            <p><?php echo nl2br(htmlspecialchars_decode($case['Description'])); ?></p>
             <p><strong>Status:</strong> <?php echo htmlspecialchars($case['Status'] ?? 'Unknown'); ?></p>
             <p><strong>Created At:</strong> <?php echo htmlspecialchars($case['CreatedAt']); ?></p>
         </section>

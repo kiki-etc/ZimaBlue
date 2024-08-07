@@ -31,6 +31,13 @@ if (isset($_POST['caseNumber']) && isset($_POST['title']) && isset($_POST['descr
     $stmtInsert->bind_param("sssi", $caseNumber, $title, $description, $createdBy);
 
     if ($stmtInsert->execute()) {
+        // Log the activity
+        $activityDescription = "Added an AJC case";
+        $activityQuery = "INSERT INTO Activities (UserID, Description) VALUES (?, ?)";
+        $stmtActivity = $conn->prepare($activityQuery);
+        $stmtActivity->bind_param("is", $createdBy, $activityDescription);
+        $stmtActivity->execute();
+
         header("Location: ../admin/cases.php?success=Case added successfully");
         exit();
     } else {
