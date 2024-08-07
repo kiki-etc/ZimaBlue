@@ -40,13 +40,19 @@ if (isset($_POST['submit_button'])) {
 
             $_SESSION['user_role'] = $roleRow['RoleID'];
 
-            // Get the role ID for superadmin
+            // Get the role IDs for superadmin and admin
             $superadminRoleQuery = "SELECT RoleID FROM Roles WHERE RoleName = 'superadmin'";
             $superadminRoleResult = $conn->query($superadminRoleQuery);
             $superadminRoleRow = $superadminRoleResult->fetch_assoc();
             $superadminRoleID = $superadminRoleRow['RoleID'];
 
-            if ($_SESSION['user_role'] == $superadminRoleID) {
+            $adminRoleQuery = "SELECT RoleID FROM Roles WHERE RoleName = 'admin'";
+            $adminRoleResult = $conn->query($adminRoleQuery);
+            $adminRoleRow = $adminRoleResult->fetch_assoc();
+            $adminRoleID = $adminRoleRow['RoleID'];
+
+            // Check if the user's role is either superadmin or admin
+            if ($_SESSION['user_role'] == $superadminRoleID || $_SESSION['user_role'] == $adminRoleID) {
                 header("Location: ../admin/admin_dash.php");
                 exit();
             } else {
