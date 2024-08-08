@@ -27,12 +27,27 @@ CREATE TABLE Cases (
     CaseNumber VARCHAR(50) NOT NULL UNIQUE,
     Title VARCHAR(255) NOT NULL,
     Description TEXT,
-    Status VARCHAR(20) DEFAULT 'pending', -- Add Status column
+    Status VARCHAR(20) DEFAULT 'pending',
     CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CreatedBy INT,
     FOREIGN KEY (CreatedBy) REFERENCES Users(UserID)
 );
-ALTER TABLE Documents DROP FOREIGN KEY documents_ibfk_1;
+
+CREATE TABLE CaseProsecutors (
+    CaseProsecutorID INT PRIMARY KEY AUTO_INCREMENT,
+    CaseID INT,
+    UserID INT,
+    FOREIGN KEY (CaseID) REFERENCES Cases(CaseID),
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
+
+CREATE TABLE CaseDefendants (
+    CaseDefendantID INT PRIMARY KEY AUTO_INCREMENT,
+    CaseID INT,
+    UserID INT,
+    FOREIGN KEY (CaseID) REFERENCES Cases(CaseID),
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
 
 CREATE TABLE ComplaintsSuggestions (
     ComplaintSuggestionID INT PRIMARY KEY AUTO_INCREMENT,
