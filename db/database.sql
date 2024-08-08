@@ -32,6 +32,7 @@ CREATE TABLE Cases (
     CreatedBy INT,
     FOREIGN KEY (CreatedBy) REFERENCES Users(UserID)
 );
+ALTER TABLE Documents DROP FOREIGN KEY documents_ibfk_1;
 
 CREATE TABLE ComplaintsSuggestions (
     ComplaintSuggestionID INT PRIMARY KEY AUTO_INCREMENT,
