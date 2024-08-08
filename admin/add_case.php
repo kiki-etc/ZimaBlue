@@ -90,10 +90,8 @@ if ($_SESSION['user_role'] != $superadminRoleID && $_SESSION['user_role'] != $ad
             <a href="../admin/cases.php"><i class="fa-solid fa-magnifying-glass"></i>View AJC Cases</a>
             <a href="../admin/complaints_suggestions.php"><i class="fa-solid fa-magnifying-glass"></i>View Complaints</a>
             <a href="../admin/add_case.php"><i class="fa-solid fa-align-justify"></i>Add New Case</a>
-            <a href="#" style="margin-top: 30px;">
-                ---------------------
-            </a>
-            <a href="../view/user_profile.php"><i class="fa-solid fa-user"></i> Profile</a>
+            <a href="../admin/view_document_summaries.php"><i class="fa-solid fa-file-alt"></i>View Document Summaries</a>
+            <a href="#" style="margin-top: 30px;">---------------------</a>
             <a href="../login/logout_view.php" style="margin-right: 100px;"><i class="fas fa-sign-out-alt"></i>Logout</a>
         </div>
     </div>
