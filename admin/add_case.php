@@ -9,7 +9,7 @@ $superadminRoleRow = $superadminRoleResult->fetch_assoc();
 $superadminRoleID = $superadminRoleRow['RoleID'];
 
 $adminRoleQuery = "SELECT RoleID FROM Roles WHERE RoleName = 'admin'";
-$adminRoleResult = $conn->query($adminRoleQuery);
+$adminRoleResult = $conn->query($adminRoleRoleQuery);
 $adminRoleRow = $adminRoleResult->fetch_assoc();
 $adminRoleID = $adminRoleRow['RoleID'];
 
@@ -47,6 +47,7 @@ if ($_SESSION['user_role'] != $superadminRoleID && $_SESSION['user_role'] != $ad
         }
 
         .form-section input[type="text"],
+        .form-section input[type="email"],
         .form-section textarea {
             margin-top: 5px;
             padding: 10px;
@@ -60,7 +61,7 @@ if ($_SESSION['user_role'] != $superadminRoleID && $_SESSION['user_role'] != $ad
             height: 100px;
         }
 
-        .form-section input[type="submit"] {
+        .form-section button {
             margin-top: 20px;
             padding: 10px 20px;
             font-size: 16px;
@@ -71,7 +72,7 @@ if ($_SESSION['user_role'] != $superadminRoleID && $_SESSION['user_role'] != $ad
             cursor: pointer;
         }
 
-        .form-section input[type="submit"]:hover {
+        .form-section button:hover {
             background-color: #A52929;
         }
     </style>
@@ -112,13 +113,39 @@ if ($_SESSION['user_role'] != $superadminRoleID && $_SESSION['user_role'] != $ad
                 
                 <label for="description">Description:</label>
                 <textarea id="description" name="description" required></textarea>
+
+                <div id="defendants">
+                    <label for="defendant_email">Defendant Email:</label>
+                    <input type="email" id="defendant_email" name="defendant_emails[]" required>
+                </div>
+                <button type="button" onclick="addDefendant()">Add Another Defendant</button>
+
+                <div id="prosecutors">
+                    <label for="prosecutor_email">Prosecutor Email:</label>
+                    <input type="email" id="prosecutor_email" name="prosecutor_emails[]" required>
+                </div>
+                <button type="button" onclick="addProsecutor()">Add Another Prosecutor</button>
                 
-                <input type="submit" value="Add Case">
+                <input type="hidden" name="upload" value="success">
+                <button type="submit">Submit</button>
             </form>
         </section>
     </div>
 
     <script src="https://kit.fontawesome.com/88061bebc5.js" crossorigin="anonymous"></script>
+    <script>
+        function addDefendant() {
+            var div = document.createElement('div');
+            div.innerHTML = '<label for="defendant_email">Defendant Email:</label><input type="email" id="defendant_email" name="defendant_emails[]" required>';
+            document.getElementById('defendants').appendChild(div);
+        }
+
+        function addProsecutor() {
+            var div = document.createElement('div');
+            div.innerHTML = '<label for="prosecutor_email">Prosecutor Email:</label><input type="email" id="prosecutor_email" name="prosecutor_emails[]" required>';
+            document.getElementById('prosecutors').appendChild(div);
+        }
+    </script>
 </body>
 
 </html>

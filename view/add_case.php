@@ -9,7 +9,7 @@ $superadminRoleRow = $superadminRoleResult->fetch_assoc();
 $superadminRoleID = $superadminRoleRow['RoleID'];
 
 $adminRoleQuery = "SELECT RoleID FROM Roles WHERE RoleName = 'admin'";
-$adminRoleResult = $conn->query($adminRoleRoleQuery);
+$adminRoleResult = $conn->query($adminRoleQuery);
 $adminRoleRow = $adminRoleResult->fetch_assoc();
 $adminRoleID = $adminRoleRow['RoleID'];
 
@@ -24,10 +24,10 @@ if ($_SESSION['user_role'] != $superadminRoleID && $_SESSION['user_role'] != $ad
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add AJC Case</title>
+    <title>Submit Proposal</title>
     <link rel="stylesheet" href="../css/dash_style.css">
     <style>
-        .form-section {
+        .upload-form {
             margin: 20px;
             padding: 20px;
             background-color: #f9f9f9;
@@ -35,45 +35,32 @@ if ($_SESSION['user_role'] != $superadminRoleID && $_SESSION['user_role'] != $ad
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        .form-section form {
-            display: flex;
-            flex-direction: column;
+        .upload-form h2 {
+            margin-top: 0;
         }
 
-        .form-section label {
-            margin-top: 10px;
+        .upload-form label {
             font-weight: bold;
-            color: #333;
         }
 
-        .form-section input[type="text"],
-        .form-section input[type="email"],
-        .form-section textarea {
-            margin-top: 5px;
+        .upload-form input[type="file"],
+        .upload-form button {
+            margin-top: 10px;
             padding: 10px;
             font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
 
-        .form-section textarea {
-            resize: vertical;
-            height: 100px;
-        }
-
-        .form-section button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
-            color: #fff;
-            background-color: #A53838;
+        .upload-form button {
+            background-color: #007bff;
+            color: white;
             border: none;
-            border-radius: 4px;
             cursor: pointer;
         }
 
-        .form-section button:hover {
-            background-color: #A52929;
+        .upload-form button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -86,64 +73,43 @@ if ($_SESSION['user_role'] != $superadminRoleID && $_SESSION['user_role'] != $ad
             </a>
         </div>
         <div class="menu_top">
-            <a href="../admin/admin_dash.php"><i class="fa-solid fa-house"></i>Dashboard</a>
-            <a href="../admin/cases.php"><i class="fa-solid fa-magnifying-glass"></i>View AJC Cases</a>
-            <a href="../admin/complaints_suggestions.php"><i class="fa-solid fa-magnifying-glass"></i>View Complaints</a>
-            <a href="../admin/add_case.php"><i class="fa-solid fa-align-justify"></i>Add New Case</a>
-            <a href="#" style="margin-top: 30px;">
-                ---------------------
-            </a>
-            <a href="../view/user_profile.php"><i class="fa-solid fa-user"></i> Profile</a>
+            <a href="../view/view_dash.php"><i class="fa-solid fa-house"></i>Dashboard</a>
+            <a href="../view/cases.php"><i class="fa-solid fa-magnifying-glass"></i> View AJC Cases</a>
+            <a href="../view/add_case.php"><i class="fa-solid fa-align-justify"></i>Submit Proposal</a>
+            <a href="#" style="margin-top: 30px;">---------------------</a>
             <a href="../login/logout_view.php" style="margin-right: 100px;"><i class="fas fa-sign-out-alt"></i>Logout</a>
         </div>
     </div>
     <div class="content">
 
         <header class="header">
-            <h1>Add New AJC Case</h1>
+            <h1>Upload PDF</h1>
         </header>
 
-        <section class="form-section">
-            <form action="../actions/add_case_action.php" method="post">
-                <label for="caseNumber">Case Number:</label>
-                <input type="text" id="caseNumber" name="caseNumber" required>
+        <section class="upload-form">
+            <form id="uploadForm" action="../actions/upload_pdf.php" method="post" enctype="multipart/form-data">
+                <h2>Upload PDF</h2>
+                <label for="caseID">Case ID:</label>
+                <input type="text" id="caseID" name="caseID" required>
                 
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="title" required>
+                <label for="pdf">Select PDF:</label>
+                <input type="file" id="pdf" name="pdf" accept="application/pdf" required>
                 
-                <label for="description">Description:</label>
-                <textarea id="description" name="description" required></textarea>
-
-                <div id="defendants">
-                    <label for="defendant_email">Defendant Email:</label>
-                    <input type="email" id="defendant_email" name="defendant_emails[]" required>
-                </div>
-                <button type="button" onclick="addDefendant()">Add Another Defendant</button>
-
-                <div id="prosecutors">
-                    <label for="prosecutor_email">Prosecutor Email:</label>
-                    <input type="email" id="prosecutor_email" name="prosecutor_emails[]" required>
-                </div>
-                <button type="button" onclick="addProsecutor()">Add Another Prosecutor</button>
-                
-                <input type="hidden" name="upload" value="success">
-                <button type="submit">Submit</button>
+                <button type="button" onclick="handleUpload()">Upload</button>
             </form>
         </section>
     </div>
 
     <script src="https://kit.fontawesome.com/88061bebc5.js" crossorigin="anonymous"></script>
     <script>
-        function addDefendant() {
-            var div = document.createElement('div');
-            div.innerHTML = '<label for="defendant_email">Defendant Email:</label><input type="email" id="defendant_email" name="defendant_emails[]" required>';
-            document.getElementById('defendants').appendChild(div);
-        }
+        function handleUpload() {
+            // Perform AJAX request to call upload_notification.php
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "../functions/upload_notification.php", true);
+            xhr.send();
 
-        function addProsecutor() {
-            var div = document.createElement('div');
-            div.innerHTML = '<label for="prosecutor_email">Prosecutor Email:</label><input type="email" id="prosecutor_email" name="prosecutor_emails[]" required>';
-            document.getElementById('prosecutors').appendChild(div);
+            // Submit the form
+            document.getElementById('uploadForm').submit();
         }
     </script>
 </body>
