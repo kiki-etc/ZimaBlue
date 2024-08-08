@@ -63,7 +63,8 @@ if ($_SESSION['user_role'] != $superadminRoleID && $_SESSION['user_role'] != $ad
         <div class="menu_top">
             <a href="../view/admin_dash.php"><i class="fa-solid fa-house"></i>Dashboard</a>
             <a href="../view/cases.php"><i class="fa-solid fa-magnifying-glass"></i> View AJC Cases</a>
-            <a href="../admin/add_case.php"><i class="fa-solid fa-align-justify"></i>Submit Proposal</a>
+            <a href="../view/add_case.php"><i class="fa-solid fa-align-justify"></i>Submit Proposal</a>
+            <a href="../view/add_complaints_suggestions.php"><i class="fa-solid fa-align-justify"></i>Submit Complaint/Suggestion</a>
             <a href="#" style="margin-top: 30px;">
                 ---------------------
             </a>
@@ -84,7 +85,7 @@ if ($_SESSION['user_role'] != $superadminRoleID && $_SESSION['user_role'] != $ad
             if ($caseResult->num_rows > 0) {
                 while ($case = $caseResult->fetch_assoc()) {
                     echo '<div class="case-item">';
-                    echo '<a href="../functions/display_case_function.php?case_id=' . $case['CaseID'] . '">' . htmlspecialchars($case['CaseNumber']) . ': ' . htmlspecialchars($case['Title']) . '</a>';
+                    echo '<a href="../functions/display_case_function_user.php?case_id=' . $case['CaseID'] . '">' . htmlspecialchars($case['CaseNumber']) . ': ' . htmlspecialchars($case['Title']) . '</a>';
                     echo '</div>';
                 }
             } else {

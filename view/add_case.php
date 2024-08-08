@@ -73,10 +73,13 @@ if ($_SESSION['user_role'] != $superadminRoleID && $_SESSION['user_role'] != $ad
             </a>
         </div>
         <div class="menu_top">
-            <a href="../view/view_dash.php"><i class="fa-solid fa-house"></i>Dashboard</a>
+            <a href="../view/admin_dash.php"><i class="fa-solid fa-house"></i>Dashboard</a>
             <a href="../view/cases.php"><i class="fa-solid fa-magnifying-glass"></i> View AJC Cases</a>
             <a href="../view/add_case.php"><i class="fa-solid fa-align-justify"></i>Submit Proposal</a>
-            <a href="#" style="margin-top: 30px;">---------------------</a>
+            <a href="../view/add_complaints_suggestions.php"><i class="fa-solid fa-align-justify"></i>Submit Complaint/Suggestion</a>
+            <a href="#" style="margin-top: 30px;">
+                ---------------------
+            </a>
             <a href="../login/logout_view.php" style="margin-right: 100px;"><i class="fas fa-sign-out-alt"></i>Logout</a>
         </div>
     </div>
