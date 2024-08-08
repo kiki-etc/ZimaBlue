@@ -24,7 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $stmt->bind_param("iiss", $caseID, $uploadedBy, $fileName, $targetFilePath);
 
                 if ($stmt->execute()) {
-                    echo json_encode(['status' => 'success']);
+                    // Redirect to the user dashboard upon successful upload
+                    header("Location: ../view/user_dash.php");
+                    exit();
                 } else {
                     echo json_encode(['status' => 'error', 'message' => 'Error inserting file information into database: ' . $conn->error]);
                 }
