@@ -70,6 +70,9 @@ CREATE TABLE Documents (
     FOREIGN KEY (UploadedBy) REFERENCES Users(UserID)
 );
 
+ALTER TABLE Documents DROP FOREIGN KEY Documents_ibfk_1;
+ALTER TABLE Documents DROP COLUMN CaseID;
+
 CREATE TABLE Activities (
     ActivityID INT PRIMARY KEY AUTO_INCREMENT,
     UserID INT,
