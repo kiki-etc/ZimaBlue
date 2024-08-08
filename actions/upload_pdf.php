@@ -2,7 +2,7 @@
 session_start();
 include "../settings/connection.php";
 
-if (isset($_POST['submit'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $caseID = intval($_POST['caseID']);
     $uploadedBy = $_SESSION['user_id']; // Assuming the user ID is stored in the session
 
