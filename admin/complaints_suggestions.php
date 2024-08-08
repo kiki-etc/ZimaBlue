@@ -78,7 +78,7 @@ if ($_SESSION['user_role'] != $superadminRoleID && $_SESSION['user_role'] != $ad
 
         <section class="case-list">
             <?php
-            $CSQuery = "SELECT ComplaintSuggestionID, Description, Title FROM Cases";
+            $CSQuery = "SELECT ComplaintSuggestionID, Description, Title FROM ComplaintsSuggestions";
             $CSResult = $conn->query($CSQuery);
 
             if ($CSResult->num_rows > 0) {
