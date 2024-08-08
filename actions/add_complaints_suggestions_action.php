@@ -24,7 +24,7 @@ if (isset($_POST['title']) && isset($_POST['description'])) {
         $stmtActivity->bind_param("is", $createdBy, $activityDescription);
         $stmtActivity->execute();
 
-        header("Location: ../view/add_complaints_suggestions.php?success=Complaint or Suggestion added successfully");
+        header("Location: ../view/user_dash.php?success=Complaint or Suggestion added successfully");
         exit();
     } else {
         header("Location: ../view/add_complaints_suggestions.php?error=Error adding complaint or suggestion");
@@ -34,4 +34,3 @@ if (isset($_POST['title']) && isset($_POST['description'])) {
     header("Location: ../view/add_complaints_suggestions.php?error=All fields are required");
     exit();
 }
-?>
