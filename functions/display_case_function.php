@@ -22,6 +22,20 @@ if ($result->num_rows > 0) {
     exit();
 }
 
+// Fetch defendants
+$defendantsQuery = "SELECT Users.Email FROM Users JOIN CaseDefendants ON Users.UserID = CaseDefendants.UserID WHERE CaseDefendants.CaseID = ?";
+$stmtDefendants = $conn->prepare($defendantsQuery);
+$stmtDefendants->bind_param("i", $caseID);
+$stmtDefendants->execute();
+$defendantsResult = $stmtDefendants->get_result();
+
+// Fetch prosecutors
+$prosecutorsQuery = "SELECT Users.Email FROM Users JOIN CaseProsecutors ON Users.UserID = CaseProsecutors.UserID WHERE CaseProsecutors.CaseID = ?";
+$stmtProsecutors = $conn->prepare($prosecutorsQuery);
+$stmtProsecutors->bind_param("i", $caseID);
+$stmtProsecutors->execute();
+$prosecutorsResult = $stmtProsecutors->get_result();
+
 // Handle form submission for updating status
 if (isset($_POST['update_status'])) {
     $newStatus = htmlspecialchars($_POST['status']);
@@ -124,6 +138,20 @@ if (isset($_POST['update_status'])) {
             <p><?php echo nl2br(htmlspecialchars_decode($case['Description'])); ?></p>
             <p><strong>Status:</strong> <?php echo htmlspecialchars($case['Status'] ?? 'Pending'); ?></p>
             <p><strong>Created At:</strong> <?php echo htmlspecialchars($case['CreatedAt']); ?></p>
+
+            <h3>Defendants</h3>
+            <ul>
+                <?php while ($defendant = $defendantsResult->fetch_assoc()): ?>
+                    <li><?php echo htmlspecialchars($defendant['Email']); ?></li>
+                <?php endwhile; ?>
+            </ul>
+
+            <h3>Prosecutors</h3>
+            <ul>
+                <?php while ($prosecutor = $prosecutorsResult->fetch_assoc()): ?>
+                    <li><?php echo htmlspecialchars($prosecutor['Email']); ?></li>
+                <?php endwhile; ?>
+            </ul>
 
             <form class="status-form" action="" method="post">
                 <label for="status">Update Status:</label>
