@@ -1,6 +1,17 @@
-<?php  
+<?php
+session_start();
 include "../settings/core.php";
 include "../settings/connection.php";
+
+// Display success and error messages
+if (isset($_SESSION['message'])) {
+    $message = $_SESSION['message'];
+    unset($_SESSION['message']);
+}
+if (isset($_SESSION['error'])) {
+    $error = $_SESSION['error'];
+    unset($_SESSION['error']);
+}
 
 // Get the role IDs for superadmin and admin
 $superadminRoleQuery = "SELECT RoleID FROM Roles WHERE RoleName = 'superadmin'";
@@ -29,6 +40,13 @@ if ($_SESSION['user_role'] != $superadminRoleID && $_SESSION['user_role'] != $ad
 </head>
 
 <body>
+    <?php if (isset($message)): ?>
+        <p style='color: green;'><?php echo $message; ?></p>
+    <?php endif; ?>
+    <?php if (isset($error)): ?>
+        <p style='color: red;'><?php echo $error; ?></p>
+    <?php endif; ?>
+    
     <div class="sidebar">
         <div class="sidebar_logo">
             <a href="../view/user_dash.php">
