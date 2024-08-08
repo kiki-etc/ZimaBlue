@@ -24,6 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $stmt->bind_param("iiss", $caseID, $uploadedBy, $fileName, $targetFilePath);
 
                 if ($stmt->execute()) {
+                    // Call the notification script
+                    include "../functions/upload_notification.php";
+
                     // Redirect to the user dashboard upon successful upload
                     header("Location: ../view/user_dash.php");
                     exit();

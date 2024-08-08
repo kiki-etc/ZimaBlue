@@ -79,3 +79,23 @@ CREATE TABLE Activities (
 );
 
 INSERT INTO Roles (RoleName) VALUES ('superadmin'), ('admin'), ('user');
+
+-- Insert the superadmin user into the Users table
+INSERT INTO Users (Username, PasswordHash, Email)
+VALUES ('superadmin', '$2y$10$ztvGOnEMx/75/6Fgn3hKkuNALgrlOo9vykYvSg5eyo0B8sS83ydmm', 'superadmin@ashesi.edu.gh');
+
+-- Get the UserID of the inserted superadmin user
+SELECT UserID FROM Users WHERE Username = 'superadmin';
+
+-- (Manually find the UserID from the result of the above query. Suppose the UserID is 1.)
+
+-- Get the RoleID of the superadmin role
+SELECT RoleID FROM Roles WHERE RoleName = 'superadmin';
+
+-- (Manually find the RoleID from the result of the above query. Suppose the RoleID is 1.)
+
+-- Insert the UserID and RoleID into the UserRoles table
+INSERT INTO UserRoles (UserID, RoleID)
+VALUES (1, 1);
+
+INSERT INTO Users (Username, PasswordHash, Email) VALUES ('kikietc', '$2y$12$A86EC7v8QTQX6.qdnJG9V.5IrfcfQrAqlq4By1gCSZjQYuHiiLqWm', 'kiki.etc@icloud.com');
