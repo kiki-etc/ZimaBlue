@@ -78,9 +78,7 @@ if ($_SESSION['user_role'] != $superadminRoleID && $_SESSION['user_role'] != $ad
             <a href="../view/cases.php"><i class="fa-solid fa-magnifying-glass"></i> View AJC Cases</a>
             <a href="../view/add_case.php"><i class="fa-solid fa-align-justify"></i>Submit Proposal</a>
             <a href="../view/add_complaints_suggestions.php"><i class="fa-solid fa-align-justify"></i>Submit Complaint/Suggestion</a>
-            <a href="#" style="margin-top: 30px;">
-                ---------------------
-            </a>
+            <a href="#" style="margin-top: 30px;">---------------------</a>
             <a href="../login/logout_view.php" style="margin-right: 100px;"><i class="fas fa-sign-out-alt"></i>Logout</a>
         </div>
     </div>
@@ -99,23 +97,12 @@ if ($_SESSION['user_role'] != $superadminRoleID && $_SESSION['user_role'] != $ad
                 <label for="pdf">Select PDF:</label>
                 <input type="file" id="pdf" name="pdf" accept="application/pdf" required>
                 
-                <button type="button" onclick="handleUpload()">Upload</button>
+                <button type="submit" name="submit">Upload</button>
             </form>
         </section>
     </div>
 
     <script src="https://kit.fontawesome.com/88061bebc5.js" crossorigin="anonymous"></script>
-    <script>
-        function handleUpload() {
-            // Perform AJAX request to call upload_notification.php
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "../functions/upload_notification.php", true);
-            xhr.send();
-
-            // Submit the form
-            document.getElementById('uploadForm').submit();
-        }
-    </script>
 </body>
 
 </html>
