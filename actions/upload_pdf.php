@@ -24,32 +24,19 @@ if (isset($_POST['submit'])) {
                 $stmt->bind_param("iiss", $caseID, $uploadedBy, $fileName, $targetFilePath);
 
                 if ($stmt->execute()) {
-                    $_SESSION['message'] = "PDF uploaded successfully.";
-                    header("Location: ../view/user_dash.php");
-                    exit();
+                    echo json_encode(['status' => 'success']);
                 } else {
-                    $_SESSION['error'] = "Error inserting file information into database: " . $conn->error;
-                    header("Location: ../view/user_dash.php");
-                    exit();
+                    echo json_encode(['status' => 'error', 'message' => 'Error inserting file information into database: ' . $conn->error]);
                 }
             } else {
-                $_SESSION['error'] = "Error moving the uploaded file.";
-                header("Location: ../view/user_dash.php");
-                exit();
+                echo json_encode(['status' => 'error', 'message' => 'Error moving the uploaded file.']);
             }
         } else {
-            $_SESSION['error'] = "Only PDF files are allowed.";
-            header("Location: ../view/user_dash.php");
-            exit();
+            echo json_encode(['status' => 'error', 'message' => 'Only PDF files are allowed.']);
         }
     } else {
-        $_SESSION['error'] = "Error uploading file.";
-        header("Location: ../view/user_dash.php");
-        exit();
+        echo json_encode(['status' => 'error', 'message' => 'Error uploading file.']);
     }
 } else {
-    $_SESSION['error'] = "No file uploaded.";
-    header("Location: ../view/user_dash.php");
-    exit();
+    echo json_encode(['status' => 'error', 'message' => 'No file uploaded.']);
 }
-?>

@@ -9,8 +9,6 @@ require '../PHPMailer-master/src/Exception.php';
 require '../PHPMailer-master/src/PHPMailer.php';
 require '../PHPMailer-master/src/SMTP.php';
 
-define('knona378@gmail.com', 'marthagyeman14@gmail.com');
-
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['upload']) && $_POST['upload'] == 'success') {
     // Initialize PHPMailer
     $mail = new PHPMailer(true);
@@ -40,11 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['upload']) && $_POST['u
         // Send email
         $mail->send();
 
-        echo "<script>
-            alert('Your message has been sent successfully');
-            window.location.href='../view/user_dash.php';
-        </script>";
-    
+        echo "Notification sent successfully.";
     } catch (Exception $e) {
         echo "Failed to send the message. Error: {$mail->ErrorInfo}";
     }

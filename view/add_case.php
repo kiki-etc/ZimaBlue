@@ -87,7 +87,7 @@ if ($_SESSION['user_role'] != $superadminRoleID && $_SESSION['user_role'] != $ad
         </header>
 
         <section class="upload-form">
-            <form action="../actions/upload_pdf.php" method="post" enctype="multipart/form-data">
+            <form id="uploadForm" action="../actions/upload_pdf.php" method="post" enctype="multipart/form-data">
                 <h2>Upload PDF</h2>
                 <label for="caseID">Case ID:</label>
                 <input type="text" id="caseID" name="caseID" required>
@@ -95,12 +95,43 @@ if ($_SESSION['user_role'] != $superadminRoleID && $_SESSION['user_role'] != $ad
                 <label for="pdf">Select PDF:</label>
                 <input type="file" id="pdf" name="pdf" accept="application/pdf" required>
                 
-                <button type="submit" name="submit">Upload</button>
+                <button type="button" onclick="handleUpload()">Upload</button>
             </form>
         </section>
     </div>
 
     <script src="https://kit.fontawesome.com/88061bebc5.js" crossorigin="anonymous"></script>
+    <script>
+        function handleUpload() {
+            // Create FormData object
+            var formData = new FormData(document.getElementById('uploadForm'));
+
+            // Perform AJAX request to upload the file
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "../actions/upload_pdf.php", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+
+                    if (response.status === 'success') {
+                        // Send notification
+                        var notificationXhr = new XMLHttpRequest();
+                        notificationXhr.open("POST", "../functions/upload_notification.php", true);
+                        notificationXhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                        notificationXhr.onreadystatechange = function () {
+                            if (notificationXhr.readyState === 4 && notificationXhr.status === 200) {
+                                alert(notificationXhr.responseText);
+                            }
+                        };
+                        notificationXhr.send("upload=success");
+                    } else {
+                        alert("Upload failed: " + response.message);
+                    }
+                }
+            };
+            xhr.send(formData);
+        }
+    </script>
 </body>
 
 </html>
