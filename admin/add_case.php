@@ -9,7 +9,7 @@ $superadminRoleRow = $superadminRoleResult->fetch_assoc();
 $superadminRoleID = $superadminRoleRow['RoleID'];
 
 $adminRoleQuery = "SELECT RoleID FROM Roles WHERE RoleName = 'admin'";
-$adminRoleResult = $conn->query($adminRoleRoleQuery);
+$adminRoleResult = $conn->query($adminRoleQuery);
 $adminRoleRow = $adminRoleResult->fetch_assoc();
 $adminRoleID = $adminRoleRow['RoleID'];
 
