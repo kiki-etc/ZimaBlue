@@ -22,6 +22,7 @@ if ($_SESSION['user_role'] != $superadminRoleID && $_SESSION['user_role'] != $ad
 <html lang="en">
 
 <head>
+    <script src="https://cdn.userway.org/widget.js" data-account="yHxBfPK57z"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit Proposal</title>
