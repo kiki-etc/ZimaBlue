@@ -21,6 +21,24 @@ if ($result->num_rows > 0) {
     echo "Case not found.";
     exit();
 }
+
+// Handle form submission for updating status
+if (isset($_POST['update_status'])) {
+    $newStatus = htmlspecialchars($_POST['status']);
+
+    $updateQuery = "UPDATE Cases SET Status = ? WHERE CaseID = ?";
+    $stmtUpdate = $conn->prepare($updateQuery);
+    $stmtUpdate->bind_param("si", $newStatus, $caseID);
+
+    if ($stmtUpdate->execute()) {
+        echo "Status updated successfully.";
+        // Refresh case data
+        $stmt->execute();
+        $case = $stmt->get_result()->fetch_assoc();
+    } else {
+        echo "Error updating status: " . $conn->error;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -47,6 +65,33 @@ if ($result->num_rows > 0) {
         .case-details p {
             margin: 10px 0;
         }
+
+        .status-form {
+            margin-top: 20px;
+        }
+
+        .status-form label {
+            font-weight: bold;
+        }
+
+        .status-form select, .status-form button {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .status-form button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .status-form button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 
@@ -54,7 +99,7 @@ if ($result->num_rows > 0) {
     <div class="sidebar">
         <div class="sidebar_logo">
             <a href="../view/user_dash.php">
-                <img id="logo" src="../images/logo.png"> 
+                <img id="logo" src="../images/logo.png">
             </a>
         </div>
         <div class="menu_top">
@@ -62,15 +107,12 @@ if ($result->num_rows > 0) {
             <a href="../admin/cases.php"><i class="fa-solid fa-magnifying-glass"></i> View AJC Cases</a>
             <a href="../admin/complaints_suggestions.php"><i class="fa-solid fa-magnifying-glass"></i>View Complaints</a>
             <a href="../admin/add_case.php"><i class="fa-solid fa-align-justify"></i>Add New Case</a>
-            <a href="#" style="margin-top: 30px;">
-                ---------------------
-            </a>
+            <a href="#" style="margin-top: 30px;">---------------------</a>
             <a href="../view/user_profile.php"><i class="fa-solid fa-user"></i> Profile</a>
             <a href="../login/logout_view.php" style="margin-right: 100px;"><i class="fas fa-sign-out-alt"></i>Logout</a>
         </div>
     </div>
     <div class="content">
-
         <header class="header">
             <h1>Case Details</h1>
         </header>
@@ -82,6 +124,15 @@ if ($result->num_rows > 0) {
             <p><?php echo nl2br(htmlspecialchars_decode($case['Description'])); ?></p>
             <p><strong>Status:</strong> <?php echo htmlspecialchars($case['Status'] ?? 'Unknown'); ?></p>
             <p><strong>Created At:</strong> <?php echo htmlspecialchars($case['CreatedAt']); ?></p>
+
+            <form class="status-form" action="" method="post">
+                <label for="status">Update Status:</label>
+                <select id="status" name="status" required>
+                    <option value="pending" <?php if ($case['Status'] == 'pending') echo 'selected'; ?>>Pending</option>
+                    <option value="resolved" <?php if ($case['Status'] == 'resolved') echo 'selected'; ?>>Resolved</option>
+                </select>
+                <button type="submit" name="update_status">Update Status</button>
+            </form>
         </section>
     </div>
 
