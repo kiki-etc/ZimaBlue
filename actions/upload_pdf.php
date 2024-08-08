@@ -24,20 +24,32 @@ if (isset($_POST['submit'])) {
                 $stmt->bind_param("iiss", $caseID, $uploadedBy, $fileName, $targetFilePath);
 
                 if ($stmt->execute()) {
-                    echo "PDF uploaded successfully.";
+                    $_SESSION['message'] = "PDF uploaded successfully.";
+                    header("Location: ../view/user_dash.php");
+                    exit();
                 } else {
-                    echo "Error inserting file information into database: " . $conn->error;
+                    $_SESSION['error'] = "Error inserting file information into database: " . $conn->error;
+                    header("Location: ../view/user_dash.php");
+                    exit();
                 }
             } else {
-                echo "Error moving the uploaded file.";
+                $_SESSION['error'] = "Error moving the uploaded file.";
+                header("Location: ../view/user_dash.php");
+                exit();
             }
         } else {
-            echo "Only PDF files are allowed.";
+            $_SESSION['error'] = "Only PDF files are allowed.";
+            header("Location: ../view/user_dash.php");
+            exit();
         }
     } else {
-        echo "Error uploading file.";
+        $_SESSION['error'] = "Error uploading file.";
+        header("Location: ../view/user_dash.php");
+        exit();
     }
 } else {
-    echo "No file uploaded.";
+    $_SESSION['error'] = "No file uploaded.";
+    header("Location: ../view/user_dash.php");
+    exit();
 }
 ?>
